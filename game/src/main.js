@@ -10,6 +10,7 @@ import { render, SCREEN_TITLE, SCREEN_PLAY, SCREEN_LEVEL, SCREEN_WIN, SCREEN_CAU
 import { createInput } from './input.js';
 import { createAudio } from './audio.js';
 import { stageShot } from './shots.js';
+import { validateLevels, describeLevel } from './validate.js';
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
@@ -232,6 +233,15 @@ function frame(time) {
   }
   render(ctx, view());
   requestAnimationFrame(frame);
+}
+
+// Validate the room data once at boot and say what is in each room. A
+// bad table is logged, never fatal: validateLevels only reports problems.
+const levelProblems = validateLevels();
+if (levelProblems.length > 0) {
+  console.warn(`Magpie: ${levelProblems.length} level problem(s):`, levelProblems);
+} else {
+  for (let i = 0; i < LEVELS.length; i += 1) console.info(describeLevel(i));
 }
 
 // A screenshot scene: stage it once, render it once, report it in the title.
