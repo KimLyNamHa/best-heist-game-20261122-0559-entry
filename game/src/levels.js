@@ -1,0 +1,237 @@
+// Magpie — The Aldermere Heist: the three rooms. Each one is a plain data
+// table: walls and display cases block movement and sight, potted palms hide
+// you while you stand behind them, dark carpet halves how fast you are
+// spotted. Border walls are added by the world, so a level only lists its
+// interior. All coordinates are in the 1280x720 logical field.
+//
+// Every level has one big prize — the piece the whole job is about — and the
+// service door stays locked until it is in Magpie's pocket. Three small
+// jewels per level are optional loot for the score.
+
+export const LEVELS = [
+  {
+    name: 'The Gallery',
+    subtitle: 'Two guards, one camera. Learn the room.',
+    prize: 'The Sun Opal',
+    palette: {
+      floor: '#3a2e20',
+      floorAlt: '#453824',
+      wall: '#5d4630',
+      wallTop: '#8a6a45',
+      case: '#33414d',
+      caseTop: '#d9a441',
+      caseGlass: 'rgba(190, 225, 255, 0.34)',
+      palm: '#1e5230',
+      palmTop: '#3f9155',
+      carpet: '#571a1c',
+      accent: '#ffd76a',
+      cone: 'rgba(255, 210, 90, 0.20)',
+      coneEdge: 'rgba(255, 210, 90, 0.60)',
+      cameraCone: 'rgba(255, 80, 70, 0.20)',
+      cameraConeEdge: 'rgba(255, 80, 70, 0.65)',
+      laser: '#ff4a3d',
+      lamp: '#ffb347',
+    },
+    playerStart: { x: 90, y: 630 },
+    exit: { x: 1100, y: 56, w: 96, h: 44 },
+    walls: [
+      { x: 250, y: 300, w: 300, h: 24 },
+      { x: 700, y: 450, w: 280, h: 24 },
+      { x: 950, y: 200, w: 24, h: 180 },
+    ],
+    cases: [
+      { x: 350, y: 120, w: 48, h: 48 },
+      { x: 820, y: 260, w: 48, h: 48 },
+      { x: 500, y: 550, w: 48, h: 48 },
+      { x: 1000, y: 520, w: 48, h: 48 },
+    ],
+    palms: [
+      { x: 180, y: 120, w: 90, h: 60 },
+      { x: 450, y: 380, w: 90, h: 60 },
+      { x: 760, y: 120, w: 90, h: 60 },
+      { x: 980, y: 580, w: 90, h: 60 },
+      { x: 150, y: 500, w: 90, h: 60 },
+    ],
+    carpets: [
+      { x: 300, y: 500, w: 200, h: 120 },
+      { x: 900, y: 100, w: 200, h: 120 },
+    ],
+    lamps: [],
+    guards: [
+      { waypoints: [{ x: 350, y: 200 }, { x: 850, y: 200 }] },
+      { waypoints: [{ x: 700, y: 600 }, { x: 1100, y: 600 }, { x: 1100, y: 350 }] },
+    ],
+    dog: null,
+    cameras: [
+      { x: 640, y: 64, baseAngle: Math.PI / 2, sweep: 0.7 },
+    ],
+    lasers: [],
+    prizeLoot: { x: 640, y: 120 },
+    loot: [
+      { x: 120, y: 90 },
+      { x: 640, y: 380 },
+      { x: 1150, y: 120 },
+    ],
+  },
+  {
+    name: 'The Vault Floor',
+    subtitle: 'Four guards, two cameras, a hound, and laser lines. Time the dark beat.',
+    prize: 'The Gilded Ibis',
+    palette: {
+      floor: '#37291f',
+      floorAlt: '#413026',
+      wall: '#5d3a28',
+      wallTop: '#8a5a3c',
+      case: '#33414d',
+      caseTop: '#d9a441',
+      caseGlass: 'rgba(190, 225, 255, 0.34)',
+      palm: '#2a5c33',
+      palmTop: '#4a9a4e',
+      carpet: '#521619',
+      accent: '#ffb347',
+      cone: 'rgba(255, 180, 80, 0.20)',
+      coneEdge: 'rgba(255, 180, 80, 0.60)',
+      cameraCone: 'rgba(255, 80, 70, 0.20)',
+      cameraConeEdge: 'rgba(255, 80, 70, 0.65)',
+      laser: '#ff4a3d',
+      lamp: '#ffb347',
+    },
+    playerStart: { x: 60, y: 660 },
+    exit: { x: 1120, y: 56, w: 96, h: 44 },
+    walls: [
+      { x: 560, y: 300, w: 160, h: 120 },
+      { x: 200, y: 180, w: 240, h: 24 },
+      { x: 840, y: 180, w: 240, h: 24 },
+      { x: 200, y: 520, w: 240, h: 24 },
+      { x: 840, y: 520, w: 240, h: 24 },
+    ],
+    cases: [
+      { x: 480, y: 210, w: 48, h: 48 },
+      { x: 760, y: 560, w: 48, h: 48 },
+      { x: 150, y: 350, w: 48, h: 48 },
+      { x: 1080, y: 350, w: 48, h: 48 },
+    ],
+    palms: [
+      { x: 300, y: 300, w: 90, h: 60 },
+      { x: 900, y: 300, w: 90, h: 60 },
+      { x: 150, y: 560, w: 90, h: 60 },
+      { x: 900, y: 560, w: 90, h: 60 },
+      { x: 600, y: 60, w: 90, h: 60 },
+    ],
+    carpets: [
+      { x: 100, y: 100, w: 180, h: 100 },
+      { x: 1000, y: 560, w: 180, h: 100 },
+      { x: 560, y: 620, w: 160, h: 80 },
+    ],
+    lamps: [
+      { x: 320, y: 130 },
+      { x: 960, y: 130 },
+      { x: 320, y: 590 },
+      { x: 960, y: 590 },
+      { x: 640, y: 360 },
+    ],
+    guards: [
+      { waypoints: [{ x: 300, y: 120 }, { x: 980, y: 120 }] },
+      { waypoints: [{ x: 300, y: 640 }, { x: 980, y: 640 }] },
+      { waypoints: [{ x: 180, y: 250 }, { x: 180, y: 500 }] },
+      { waypoints: [{ x: 1100, y: 250 }, { x: 1100, y: 500 }] },
+    ],
+    dog: { waypoints: [{ x: 560, y: 450 }, { x: 720, y: 450 }, { x: 720, y: 490 }, { x: 560, y: 490 }] },
+    cameras: [
+      { x: 320, y: 64, baseAngle: Math.PI / 2, sweep: 0.6 },
+      { x: 960, y: 64, baseAngle: Math.PI / 2, sweep: 0.6 },
+    ],
+    // Two vertical beams flanking the middle column, blinking in turn: cross
+    // one while it is dark, never while it glows.
+    lasers: [
+      { x1: 560, y1: 180, x2: 560, y2: 540, phase: 0 },
+      { x1: 720, y1: 180, x2: 720, y2: 540, phase: 1.8 },
+    ],
+    prizeLoot: { x: 640, y: 250 },
+    loot: [
+      { x: 90, y: 90 },
+      { x: 1190, y: 90 },
+      { x: 640, y: 520 },
+    ],
+  },
+  {
+    name: 'The Grand Vault',
+    subtitle: 'Six guards, three cameras, one laser wall. No mistakes.',
+    prize: 'The Aldermere Crown',
+    palette: {
+      floor: '#262233',
+      floorAlt: '#2e2940',
+      wall: '#453d5c',
+      wallTop: '#5f5478',
+      case: '#33414d',
+      caseTop: '#d9a441',
+      caseGlass: 'rgba(190, 225, 255, 0.34)',
+      palm: '#23473a',
+      palmTop: '#3a7a5c',
+      carpet: '#3d1836',
+      accent: '#7fd4ff',
+      cone: 'rgba(255, 210, 90, 0.20)',
+      coneEdge: 'rgba(255, 210, 90, 0.60)',
+      cameraCone: 'rgba(255, 80, 70, 0.20)',
+      cameraConeEdge: 'rgba(255, 80, 70, 0.65)',
+      laser: '#ff4a3d',
+      lamp: '#7fd4ff',
+    },
+    playerStart: { x: 60, y: 660 },
+    exit: { x: 1120, y: 56, w: 96, h: 44 },
+    walls: [
+      { x: 400, y: 0, w: 24, h: 300 },
+      { x: 400, y: 420, w: 24, h: 300 },
+      { x: 880, y: 0, w: 24, h: 300 },
+      { x: 880, y: 420, w: 24, h: 300 },
+      { x: 520, y: 200, w: 240, h: 24 },
+      { x: 520, y: 520, w: 240, h: 24 },
+    ],
+    cases: [
+      { x: 500, y: 100, w: 48, h: 48 },
+      { x: 760, y: 100, w: 48, h: 48 },
+      { x: 500, y: 600, w: 48, h: 48 },
+      { x: 760, y: 600, w: 48, h: 48 },
+      { x: 180, y: 340, w: 48, h: 48 },
+      { x: 1060, y: 340, w: 48, h: 48 },
+    ],
+    palms: [
+      { x: 250, y: 100, w: 90, h: 60 },
+      { x: 950, y: 100, w: 90, h: 60 },
+      { x: 250, y: 560, w: 90, h: 60 },
+      { x: 950, y: 560, w: 90, h: 60 },
+      { x: 600, y: 380, w: 90, h: 60 },
+    ],
+    carpets: [
+      { x: 100, y: 200, w: 160, h: 120 },
+      { x: 1020, y: 200, w: 160, h: 120 },
+      { x: 560, y: 640, w: 160, h: 60 },
+    ],
+    lamps: [],
+    guards: [
+      { waypoints: [{ x: 150, y: 100 }, { x: 150, y: 620 }] },
+      { waypoints: [{ x: 1140, y: 100 }, { x: 1140, y: 620 }] },
+      { waypoints: [{ x: 500, y: 300 }, { x: 780, y: 300 }] },
+      { waypoints: [{ x: 500, y: 480 }, { x: 780, y: 480 }] },
+      { waypoints: [{ x: 300, y: 360 }, { x: 980, y: 360 }] },
+      { waypoints: [{ x: 500, y: 600 }, { x: 780, y: 600 }] },
+    ],
+    dog: null,
+    cameras: [
+      { x: 640, y: 140, baseAngle: Math.PI / 2, sweep: 0.8 },
+      { x: 640, y: 580, baseAngle: -Math.PI / 2, sweep: 0.8 },
+      { x: 200, y: 360, baseAngle: 0, sweep: 0.6 },
+    ],
+    // One horizontal beam across the middle gap: the only way into the
+    // middle room is through it, on the dark beat.
+    lasers: [
+      { x1: 440, y1: 360, x2: 840, y2: 360, phase: 0 },
+    ],
+    prizeLoot: { x: 640, y: 250 },
+    loot: [
+      { x: 90, y: 90 },
+      { x: 1190, y: 630 },
+      { x: 640, y: 480 },
+    ],
+  },
+];
