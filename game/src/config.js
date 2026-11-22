@@ -85,6 +85,87 @@ export const NOISE = { interval: 0.4, range: 170, spike: 15 };
 /** A potted palm hides you completely while you stand behind it. */
 export const PALM = { hide: true };
 
+/**
+ * The rooms, in order. The index of a room in LEVELS is the index of its
+ * palette key here, so validate.js can check a room wears its own palette.
+ */
+export const ROOM_PALETTES = ['gallery', 'vaultFloor', 'grandVault'];
+
+/**
+ * The canonical room palettes — the exact colours levels.js paints each
+ * room with, named here so a reader (and the validator) can see what a
+ * room is meant to look like without digging through the data tables.
+ * These are the source of truth for the palettes; levels.js holds the
+ * working copies, and validate.js reports any value that drifts from
+ * the canonical one. Do not edit one without the other.
+ */
+export const PALETTES = {
+  // The Gallery: warm marble underfoot, dark wood, brass trim, deep red
+  // carpet — a grand room that still feels like a museum, not a vault.
+  gallery: {
+    floor: '#3a2e20',
+    floorAlt: '#453824',
+    wall: '#5d4630',
+    wallTop: '#8a6a45',
+    case: '#33414d',
+    caseTop: '#d9a441',
+    caseGlass: 'rgba(190, 225, 255, 0.34)',
+    palm: '#1e5230',
+    palmTop: '#3f9155',
+    carpet: '#571a1c',
+    accent: '#ffd76a',
+    cone: 'rgba(255, 210, 90, 0.20)',
+    coneEdge: 'rgba(255, 210, 90, 0.60)',
+    cameraCone: 'rgba(255, 80, 70, 0.20)',
+    cameraConeEdge: 'rgba(255, 80, 70, 0.65)',
+    laser: '#ff4a3d',
+    lamp: '#ffb347',
+  },
+  // The Vault Floor: the same warm base pushed toward copper and amber,
+  // so the room reads as the working floor above the vault — busier,
+  // warmer, more lamps, more places to hide.
+  vaultFloor: {
+    floor: '#37291f',
+    floorAlt: '#413026',
+    wall: '#5d3a28',
+    wallTop: '#8a5a3c',
+    case: '#33414d',
+    caseTop: '#d9a441',
+    caseGlass: 'rgba(190, 225, 255, 0.34)',
+    palm: '#2a5c33',
+    palmTop: '#4a9a4e',
+    carpet: '#521619',
+    accent: '#ffb347',
+    cone: 'rgba(255, 180, 80, 0.20)',
+    coneEdge: 'rgba(255, 180, 80, 0.60)',
+    cameraCone: 'rgba(255, 80, 70, 0.20)',
+    cameraConeEdge: 'rgba(255, 80, 70, 0.65)',
+    laser: '#ff4a3d',
+    lamp: '#ffb347',
+  },
+  // The Grand Vault: cold violet stone and ice-blue light, the colour of
+  // a locked vault at night — the hardest room looks the coldest.
+  grandVault: {
+    floor: '#262233',
+    floorAlt: '#2e2940',
+    wall: '#453d5c',
+    wallTop: '#5f5478',
+    case: '#33414d',
+    caseTop: '#d9a441',
+    caseGlass: 'rgba(190, 225, 255, 0.34)',
+    palm: '#23473a',
+    palmTop: '#3a7a5c',
+    carpet: '#3d1836',
+    accent: '#7fd4ff',
+    cone: 'rgba(255, 210, 90, 0.20)',
+    coneEdge: 'rgba(255, 210, 90, 0.60)',
+    cameraCone: 'rgba(255, 80, 70, 0.20)',
+    cameraConeEdge: 'rgba(255, 80, 70, 0.65)',
+    laser: '#ff4a3d',
+    lamp: '#7fd4ff',
+  },
+};
+
 export const FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif';
 
 /** Where the best result is kept between visits (this browser only). */
